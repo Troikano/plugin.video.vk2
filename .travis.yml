@@ -3,7 +3,7 @@ python:
   - "2.7"
 env:
   global:
-    - TRAVIS_TAG=1.8.0
+    - TRAVIS_TAG=2.0.0-dev
     - PWD=$(pwd)
     - TESTPATH=$PWD/resources/lib/tests
     - PROFILEPATH=$PWD/tmp/addon_data
@@ -25,12 +25,12 @@ before_deploy:
   - cp -r addon.xml CHANGELOG.md LICENSE.md README.md resources $DISTPATH
   - rm -r $DISTPATH/resources/lib/tests
   - zip $DISTPATH/plugin.video.vk-$TRAVIS_TAG.zip -r $DISTPATH
-  - git config --local user.name "Tomas Mistoler"
-  - git config --local user.email "tomas.mistoler@gmail.com"
+  - git config --local user.name "Troikano"
+  - git config --local user.email "tdcp87@gmail.com"
   - git tag $TRAVIS_TAG
 deploy:
   on:
-    repo: tommistolercz/plugin.video.vk
+    repo: Troikano/plugin.video.vk
     branch: master
     tags: true
   provider: releases
