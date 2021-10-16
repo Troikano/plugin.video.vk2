@@ -3,16 +3,16 @@
 __all__ = []
 
 import datetime
-import HTMLParser
+import html
 import math
 import os
 import pickle
 import re
 import sys
-import urllib  # py2
-import urlparse  # py2
+import urllib.parse as urlparse
 
 import xbmc
+import xbmcvfs
 import xbmcaddon
 import xbmcgui
 import xbmcplugin
@@ -246,7 +246,7 @@ def buildfp(filename):  # type: (str) -> str
     """
     Build add-on data file path.
     """
-    fp = str(os.path.join(xbmc.translatePath(ADDON.getAddonInfo('profile')), filename))
+    fp = str(os.path.join(xbmcvfs.translatePath(ADDON.getAddonInfo('path')), filename))
     return fp
 
 
@@ -256,7 +256,7 @@ def buildurl(urlpath, urlargs=None):  # type: (str, dict) -> str
     """
     url = 'plugin://' + ADDON.getAddonInfo('id') + urlpath
     if urlargs:
-        url += '?' + urllib.urlencode(urlargs)
+        url += '?' + urlparse.urlencode(urlargs)
     return url
 
 

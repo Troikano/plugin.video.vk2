@@ -3,6 +3,7 @@
 import re
 import logging
 from collections import Iterable
+from urllib.parse import unquote
 
 import requests
 
@@ -60,6 +61,7 @@ def stringify_values(dictionary):
 
 
 def get_url_query(url):
+    url = unquote(unquote(url))
     parsed_url = urlparse(url)
     url_query = parse_qsl(parsed_url.fragment)
     # login_response_url_query can have multiple key
