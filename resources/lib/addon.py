@@ -1110,17 +1110,9 @@ def playvideo(ownerid, videoid):  # type: (int, int) -> None
     if ADDON.getSetting('preferhls') == 'true':
         # hls - if enabled in settings
         try:
-            resolvedpath = HTMLParser.HTMLParser().unescape(urllib.unquote(
-                re.compile(r'src="([^"]+video_hls\.php[^"]+)"').findall(cnt)[0]
+            resolvedpath = html.unescape(urlparse.unquote(
+                re.compile(r'"hls":"([^"]+)"').findall(cnt)[0]
             )).encode('utf-8')
-        except IndexError:
-            pass
-    if not resolvedpath:
-        # mp4
-        try:
-            srcs = {m[1]: m[0] for m in re.compile(r'src="([^"]+\.(\d+)\.mp4[^"]+)"').findall(cnt)}
-            bestq = sorted(srcs.keys(), key=lambda k: int(k), reverse=True)[0]
-            resolvedpath = srcs[bestq]
         except IndexError:
             xbmc.log('plugin.video.vk: Video resolving error!', level=xbmc.LOGERROR)
             raise AddonError(ERR_RESOLVING)
