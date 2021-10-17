@@ -116,7 +116,7 @@ class AuthMixin(object):
             'display': 'mobile',
             'response_type': 'token',
             'scope': self.scope,
-            'v': '5.28',
+            'v': '5.131',
         }
         response = self.auth_session.post(self.AUTHORIZE_URL, auth_data)
         response_url_query = get_url_query(response.url)
