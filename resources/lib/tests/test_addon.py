@@ -121,7 +121,7 @@ def patch_xbmcplugin(monkeypatch, context=addon):
 def patch_xbmcgui(monkeypatch, context=addon):
 
     def mock_input(heading, **_):  # type: (str, dict) -> str
-        return MOCK_USERINPUTS[heading]
+        return MOCK_USERINPUTS[heading.decode("utf-8")]
 
     mock_dialogclass = mock.Mock(name='Dialog')
     mock_dialogclass.input.side_effect = mock_input
