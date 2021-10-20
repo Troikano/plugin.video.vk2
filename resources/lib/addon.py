@@ -769,7 +769,7 @@ def listsearchedvideos(q, offset=0):  # type: (str, int) -> None
         # notify search results count
         xbmcgui.Dialog().notification(
             ADDON.getAddonInfo('name'),
-            ADDON.getLocalizedString(30084).encode('utf-8').format(searchedvideos['count'])
+            ADDON.getLocalizedString(30084).format(searchedvideos['count']).encode('utf-8')
         )
     # build list
     buildvideolist(URLPATH_LISTSEARCHEDVIDEOS, searchedvideos)
@@ -893,7 +893,7 @@ def buildvideolist(listtype, listdata):  # type: (str, dict) -> None
     # create list items
     for video in listdata['items']:
         # create video item
-        videotitle = video['title'].encode('utf-8').replace('.', ' ').replace('_', ' ')  # wrapable
+        videotitle = video['title'].replace('.', ' ').replace('_', ' ').encode('utf-8')  # wrapable
         li = xbmcgui.ListItem(videotitle)
         # set isplayable
         li.setProperty('IsPlayable', 'true')
