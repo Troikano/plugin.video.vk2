@@ -4,6 +4,7 @@ import mock
 import os
 import pytest
 import addon  # test target
+import time
 
 
 # env vars (set in IDE for local debug and in travis.yml for CI)
@@ -160,6 +161,10 @@ def test_addonglobal(context=addon):
     assert context.ADDON.getAddonInfo('id') == MOCK_ADDONINFO['id']
     assert context.ADDON.getSetting('itemsperpage') == MOCK_USERSETTINGS['itemsperpage']
 
+@pytest.fixture(autouse=True)
+def slow_down_tests():
+    yield
+    time.sleep(1)
 
 def test_initvkauthsession(context=addon):
     context.ADDON = context.initaddon()
@@ -173,12 +178,20 @@ def test_initvkauthsession(context=addon):
     vkauthsession_r = context.initvkauthsession()
     assert isinstance(vkauthsession_r, context.vk.api.AuthSession)
 
+@pytest.fixture(autouse=True)
+def slow_down_tests():
+    yield
+    time.sleep(1)
 
 def test_initvkapi(context=addon):
     context.ADDON = context.initaddon()
     vkapi = context.initvkapi()
     assert isinstance(vkapi, context.vk.api.API)
 
+@pytest.fixture(autouse=True)
+def slow_down_tests():
+    yield
+    time.sleep(1)
 
 def test_vkapi_video_get(context=addon):
     context.ADDON = context.initaddon()
@@ -190,6 +203,10 @@ def test_vkapi_video_get(context=addon):
     )
     assert r['count'] == 1
 
+@pytest.fixture(autouse=True)
+def slow_down_tests():
+    yield
+    time.sleep(1)
 
 # general
 
