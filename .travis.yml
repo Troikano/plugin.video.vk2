@@ -20,6 +20,7 @@ script:
   - cd $TESTPATH
   - pytest -v -rA
 before_deploy:
+  - cd ..
   - cd $PWD
   - mkdir -p $DISTPATH
   - cp -r addon.xml CHANGELOG.md LICENSE.md README.md resources $DISTPATH
