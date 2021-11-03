@@ -1,6 +1,7 @@
 # coding=utf-8
 
 import logging
+import re
 
 from vk.exceptions import VkAuthError
 from vk.utils import raw_input, get_url_query, LoggingSession, get_form_action
@@ -66,7 +67,7 @@ class AuthMixin(object):
         auth_session = LoggingSession()
         with auth_session as self.auth_session:
             self.auth_session = auth_session
-            self.login()
+            #self.login() The login flow changed. Disable
             auth_response_url_query = self.oauth2_authorization()
 
         if 'access_token' in auth_response_url_query:
@@ -118,7 +119,29 @@ class AuthMixin(object):
             'scope': self.scope,
             'v': '5.131',
         }
+        login_form_data = {
+            'ip_h': '',
+            'lg_h': '',
+            'lg_domain_h': '',
+            '_origin': 'https://oauth.vk.com',
+            'to': '',
+            'expire': '0',
+            'email': self.user_login,
+            'pass': self.user_password,
+        }
         response = self.auth_session.post(self.AUTHORIZE_URL, auth_data)
+        login_form_data['ip_h']=re.compile(r'"ip_h" value="([^"]+)"').findall(response.text)[0]
+        login_form_data['lg_h']=re.compile(r'"lg_h" value="([^"]+)"').findall(response.text)[0]
+        login_form_data['lg_domain_h']=re.compile(r'"lg_domain_h" value="([^"]+)"').findall(response.text)[0]
+        login_form_data['to']=re.compile(r'"to" value="([^"]+)"').findall(response.text)[0]
+        form_action = get_form_action(response.text)
+        headers = { 
+            'Host':'login.vk.com', 
+            'Origin':'https://oauth.vk.com', 
+            'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0'
+        }
+        response = self.auth_session.post(form_action, data=login_form_data, headers=headers)
+        response = self.auth_session.get(response.url)
         response_url_query = get_url_query(response.url)
         if 'access_token' in response_url_query:
             return response_url_query
