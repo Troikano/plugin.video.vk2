@@ -1105,13 +1105,13 @@ def playvideo(ownerid, videoid):  # type: (int, int) -> None
     vkr = initvkresolver()
     headers={'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0'}
     r = vkr.get('https://vk.com/al_video.php?act=show_inline&al=1&video={}'.format(oidid), headers=headers)
-    cnt = r.text.replace('\\', '').encode('utf-8')
+    cnt = r.text.replace('\\', '')
     resolvedpath = None
     if ADDON.getSetting('preferhls') == 'true':
         # hls - if enabled in settings
         try:
             resolvedpath = html.unescape(urlparse.unquote(
-                re.compile(r'"hls":"([^"]+)"').findall(cnt.decode('utf-8'))[0]
+                re.compile(r'"hls":"([^"]+)"').findall(cnt)[0]
             )).encode('utf-8')
         except IndexError:
             xbmc.log('plugin.video.vk: Video resolving error!', level=xbmc.LOGERROR)
