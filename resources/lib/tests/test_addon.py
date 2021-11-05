@@ -57,9 +57,9 @@ MOCK_USERINPUTS = {
 }
 
 MOCK_VIDEO = {
-    'owner_id': -152615939,
-    'id': 456239302,
-    '_oidid': '-152615939_456239302',
+    'owner_id': -206019729,
+    'id': 456239046,
+    '_oidid': '-206019729_456239046',
 }
 
 MOCK_COMMUNITY = {
