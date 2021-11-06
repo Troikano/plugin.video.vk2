@@ -1104,6 +1104,7 @@ def playvideo(ownerid, videoid):  # type: (int, int) -> None
     # resolve playable streams + find best quality
     vkr = initvkresolver()
     headers={
+        'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
         'Host':'vk.com',
         'Sec-Fetch-Dest':'document',
         'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0'
