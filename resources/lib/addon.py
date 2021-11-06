@@ -1103,7 +1103,10 @@ def playvideo(ownerid, videoid):  # type: (int, int) -> None
     oidid = str('{}_{}'.format(ownerid, videoid))
     # resolve playable streams + find best quality
     vkr = initvkresolver()
-    headers={'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0'}
+    headers={
+        'Sec-Fetch-Dest':'document',
+        'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0'
+    }
     r = vkr.get('https://vk.com/al_video.php?act=show_inline&al=1&video={}'.format(oidid), headers=headers)
     cnt = r.text.replace('\\', '')
     resolvedpath = None
