@@ -115,7 +115,7 @@ msgid "Data file error!"
 msgstr ""
 
 msgctxt "#30024"
-msgid "Video resolving error!"
+msgid "Video resolving error! Try again to renew the token."
 msgstr ""
 
 msgctxt "#30030"
