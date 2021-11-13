@@ -23,14 +23,12 @@
 ## Installation
 
 1. Download the add-on zip file:<br>
-    [Latest release](https://github.com/tommistolercz/plugin.video.vk/releases/latest)
+    [Latest release](https://github.com/Troikano/plugin.video.vk/releases/latest)
     
 2. Install in Kodi:<br>
     `Kodi → Settings → Add-ons → Install from zip file...`<br>
     [How to install add-ons from zip files](https://kodi.wiki/view/HOW-TO:Install_add-ons_from_zip_files)
 
-Note: You can also install this add-on from [repository.tommistolercz](https://github.com/tommistolercz/repository.tommistolercz). 
-With this method, the add-on will auto-update when there is a new version available.
 
 ## Features
 
@@ -111,3 +109,4 @@ Communities:
 
 - [TomMistolerCZ](https://github.com/tommistolercz)
 - Владимир Малявин (RU translation)
+- [Troikano](https://github.com/Troikano)
