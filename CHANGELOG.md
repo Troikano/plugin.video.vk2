@@ -1,5 +1,17 @@
 # CHANGELOG
 
+
+## plugin.video.vk-2.0.0-dev (unreleased)
+
+Added:
+- Python 3 support (Kodi v19+)
+
+Fixed:
+- Login flow AuthSession
+- TranslatePath in buildfp(filename)
+- Regex in resolvedpath to find the correct link hls
+- Encode problems
+
 ## plugin.video.vk-1.8.0 (2021-05-16)
 
 Fixed:
