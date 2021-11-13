@@ -31,6 +31,12 @@
         <news>
 Added:
 - Python 3 support (Kodi v19+)
+
+Fixed:
+- Login flow AuthSession
+- TranslatePath in buildfp(filename)
+- Regex in resolvedpath to find the correct link hls
+- Encode problems
         </news>
     </extension>
 </addon>
