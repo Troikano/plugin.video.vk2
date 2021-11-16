@@ -2,7 +2,7 @@
 
 # VK (plugin.video.vk2)
 
-#### Kodi add-on for watching videos from VK.com social network.
+#### Kodi add-on for watching videos from VK.com social network. A new version with python3 for Kodi v19+
 
 ![GitHub release](https://img.shields.io/github/release/troikano/plugin.video.vk2.svg) 
 ![GitHub license](https://img.shields.io/github/license/troikano/plugin.video.vk2.svg) 
