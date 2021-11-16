@@ -1,6 +1,6 @@
 # Kodi Media Center language file
 # Addon Name: VK
-# Addon id: plugin.video.vk
+# Addon id: plugin.video.vk2
 # Addon Provider: TomMistolerCZ
 msgid ""
 msgstr ""

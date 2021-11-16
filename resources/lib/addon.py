@@ -163,12 +163,12 @@ def initvkauthsession():  # type: () -> vk.api.AuthSession
             option=xbmcgui.ALPHANUM_HIDE_INPUT
         )
         if not login or not pswd:
-            xbmc.log('plugin.video.vk: VK auth error!', level=xbmc.LOGERROR)
+            xbmc.log('plugin.video.vk2: VK auth error!', level=xbmc.LOGERROR)
             raise AddonError(ERR_VKAUTH)
         try:
             vkauthsession = vk.api.AuthSession(VKAPI_APPID, login, pswd, VKAPI_SCOPE)
         except vk.exceptions.VkAuthError:
-            xbmc.log('plugin.video.vk: VK auth error!', level=xbmc.LOGERROR)
+            xbmc.log('plugin.video.vk2: VK auth error!', level=xbmc.LOGERROR)
             raise AddonError(ERR_VKAUTH)
         savesession(vkauthsession)
         ADDON.setSetting('vkuserlogin', login)
@@ -190,7 +190,7 @@ def initvkapi(vkauthsession=None):  # type: (vk.api.AuthSession) -> vk.api.API
         vkapi = vk.api.API(vkauthsession, v=VKAPI_VERSION, lang=VKAPI_LANG)
         vkapi.stats.trackVisitor()
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     return vkapi
 
@@ -213,7 +213,7 @@ def savesession(obj):  # type: (object) -> None
         with open(fp, 'wb') as f:  # truncate if exists
             pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
     except IOError:
-        xbmc.log('plugin.video.vk: Data file error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: Data file error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_DATAFILE)
 
 
@@ -226,7 +226,7 @@ def loadsession():  # type: () -> object
         with open(fp, 'rb') as f:  # must exist since auth
             obj = pickle.load(f)
     except IOError:
-        xbmc.log('plugin.video.vk: Data file error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: Data file error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_DATAFILE)
     return obj
 
@@ -315,7 +315,7 @@ def dispatch():  # type: () -> None
     try:
         handler = ROUTING[urlpath]
     except KeyError:
-        xbmc.log('plugin.video.vk: Routing error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: Routing error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_ROUTING)
     handler(**urlargs)
 
@@ -339,7 +339,7 @@ def listaddonmenu():  # type: () -> None
     try:
         counters.update(vkapi.execute.getMenuCounters())
     except vk.exceptions.VkAuthError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # build menu list
     menu = KodiList()
@@ -743,7 +743,7 @@ def listsearchedvideos(q, offset=0):  # type: (str, int) -> None
     try:
         searchedvideos = vkapi.video.search(**kwargs)
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # pagination data
     if searchedvideos['count'] > offset + itemsperpage:
@@ -798,7 +798,7 @@ def listvideos(ownerid=0, albumid=0, offset=0):  # type: (int, int, int) -> None
     try:
         videos = vkapi.video.get(**kwargs)
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # pagination data
     if videos['count'] > offset + itemsperpage:
@@ -829,7 +829,7 @@ def listlikedvideos(offset=0):  # type: (int) -> None
             count=itemsperpage,
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # pagination data
     if likedvideos['count'] > offset + itemsperpage:
@@ -1116,7 +1116,7 @@ def playvideo(ownerid, videoid):  # type: (int, int) -> None
                 re.compile(r'"hls":"([^"]+)"').findall(cnt)[0]
             ))
         except IndexError:
-            xbmc.log('plugin.video.vk: Video resolving error!', level=xbmc.LOGERROR)
+            xbmc.log('plugin.video.vk2: Video resolving error!', level=xbmc.LOGERROR)
             logout()
             raise AddonError(ERR_RESOLVING)
     # update played video history - if enabled in settings
@@ -1126,7 +1126,7 @@ def playvideo(ownerid, videoid):  # type: (int, int) -> None
         try:
             video = vkapi.video.get(extended=1, videos=oidid)['items'][0]
         except vk.exceptions.VkAPIError:
-            xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+            xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
             raise AddonError(ERR_VKAPI)
         video.update(
             {
@@ -1160,7 +1160,7 @@ def likevideo(ownerid, videoid):  # type: (int, int) -> None
             item_id=videoid,
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # refresh content
     xbmc.executebuiltin('Container.Refresh()')
@@ -1182,7 +1182,7 @@ def unlikevideo(ownerid, videoid):  # type: (int, int) -> None
             item_id=videoid,
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # refresh content
     xbmc.executebuiltin('Container.Refresh()')
@@ -1210,7 +1210,7 @@ def addvideotoalbums(ownerid, videoid):  # type: (int, int) -> None
             video_id=videoid,
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # create dialog w current albums selected
     opts = []
@@ -1243,7 +1243,7 @@ def addvideotoalbums(ownerid, videoid):  # type: (int, int) -> None
                 album_ids=newalbumids
             )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # refresh content
     xbmc.executebuiltin('Container.Refresh()')
@@ -1262,7 +1262,7 @@ def addvideotowatchlist(ownerid, videoid):  # type: (int, int) -> None
     try:
         video = vkapi.video.get(extended=1, videos=oidid)['items'].pop()
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # store video into db
     video.update(
@@ -1359,7 +1359,7 @@ def listalbums(offset=0):  # type: (int) -> None
             count=itemsperpage,
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     listitems = []
     thumbsizes = ['photo_320', 'photo_160']
@@ -1519,7 +1519,7 @@ def reorderalbum(albumid, beforeid=None, afterid=None):  # type: (int, int, int)
             **reorder
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # refresh content
     xbmc.executebuiltin('Container.Refresh()')
@@ -1538,7 +1538,7 @@ def renamealbum(albumid):  # type: (int) -> None
             album_id=albumid
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # ask user for editing current album title
     newtitle = xbmcgui.Dialog().input(
@@ -1555,7 +1555,7 @@ def renamealbum(albumid):  # type: (int) -> None
             privacy=3  # 3=onlyme
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # refresh content
     xbmc.executebuiltin('Container.Refresh()')
@@ -1580,7 +1580,7 @@ def deletealbum(albumid):  # type: (int) -> None
             album_id=albumid,
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # refresh content
     xbmc.executebuiltin('Container.Refresh()')
@@ -1605,7 +1605,7 @@ def createalbum():  # type: () -> None
             privacy=3,  # 3=onlyme
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # refresh content
     xbmc.executebuiltin('Container.Refresh()')
@@ -1630,7 +1630,7 @@ def listcommunities(offset=0):  # type: (int) -> None
             count=itemsperpage,
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # pagination data
     if communities['count'] > offset + itemsperpage:
@@ -1661,7 +1661,7 @@ def listlikedcommunities(offset=0):  # type: (int) -> None
             count=itemsperpage,
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # pagination data
     if likedcommunities['count'] > offset + itemsperpage:
@@ -1817,7 +1817,7 @@ def likecommunity(communityid):  # type: (int) -> None
             group_id=communityid
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # refresh content
     xbmc.executebuiltin('Container.Refresh()')
@@ -1836,7 +1836,7 @@ def unlikecommunity(communityid):  # type: (int) -> None
             group_id=communityid
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # refresh content
     xbmc.executebuiltin('Container.Refresh()')
@@ -1855,7 +1855,7 @@ def followcommunity(communityid):  # type: (int) -> None
             group_id=communityid
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # refresh content
     xbmc.executebuiltin('Container.Refresh()')
@@ -1880,7 +1880,7 @@ def unfollowcommunity(communityid):  # type: (int) -> None
             group_id=communityid
         )
     except vk.exceptions.VkAPIError:
-        xbmc.log('plugin.video.vk: VK API error!', level=xbmc.LOGERROR)
+        xbmc.log('plugin.video.vk2: VK API error!', level=xbmc.LOGERROR)
         raise AddonError(ERR_VKAPI)
     # refresh content
     xbmc.executebuiltin('Container.Refresh()')

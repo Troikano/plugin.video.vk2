@@ -7,7 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/resources/lib/vk" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/resources/lib/tests" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/../../userdata/addon_data/plugin.video.vk" />
+    <content url="file://$MODULE_DIR$/../../userdata/addon_data/plugin.video.vk2" />
     <orderEntry type="jdk" jdkName="Python 3.8 (kodipython3)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

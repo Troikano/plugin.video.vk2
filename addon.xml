@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.vk" name="VK" version="2.0.0" provider-name="Troikano">
+<addon id="plugin.video.vk2" name="VK" version="2.0.0" provider-name="Troikano">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.requests" version="2.8.1"/>
@@ -21,7 +21,7 @@
         <platform>all</platform>
         <license>GNU GENERAL PUBLIC LICENSE. Version 3, June 2007</license>
         <website>https://www.vk.com</website>
-        <source>https://github.com/Troikano/plugin.video.vk</source>
+        <source>https://github.com/Troikano/plugin.video.vk2</source>
         <assets>
             <icon>resources/icon.png</icon>
             <screenshot>resources/media/screenshot01.jpg</screenshot>

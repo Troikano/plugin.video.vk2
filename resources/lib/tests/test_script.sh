@@ -8,8 +8,8 @@ sudo docker exec -it $BUILDID bash -l -c "bash -v test_script_docker.sh"
 su - travis
 curl -sSf --retry 5 -o python-3.8.tar.bz2 https://storage.googleapis.com/travis-ci-language-archives/python/binaries/ubuntu/16.04/x86_64/python-3.8.tar.bz2
 sudo tar xjf python-3.8.tar.bz2 --directory /
-git clone --depth=50 --branch=develop https://github.com/Troikano/plugin.video.vk.git Troikano/plugin.video.vk
-cd Troikano/plugin.video.vk
+git clone --depth=50 --branch=develop https://github.com/Troikano/plugin.video.vk2.git Troikano/plugin.video.vk2
+cd Troikano/plugin.video.vk2
 git checkout -qf 1ed9382796dc83057d0bf28d52fc2eafbe509d73
 read -p "VK USER LOGIN:" LOGIN
 read -p "VK USER PASSWORD:" PSWD

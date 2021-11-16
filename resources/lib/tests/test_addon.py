@@ -26,7 +26,7 @@ MOCK_KODIENV = {
 }
 
 MOCK_ADDONINFO = {
-    'id': 'plugin.video.vk',
+    'id': 'plugin.video.vk2',
     'name': 'VK',
 }
 

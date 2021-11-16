@@ -1,12 +1,12 @@
 ![Add-on icon](resources/icon.png)
 
-# VK (plugin.video.vk)
+# VK (plugin.video.vk2)
 
 #### Kodi add-on for watching videos from VK.com social network.
 
-![GitHub release](https://img.shields.io/github/release/troikano/plugin.video.vk.svg) 
-![GitHub license](https://img.shields.io/github/license/troikano/plugin.video.vk.svg) 
-![GitHub downloads](https://img.shields.io/github/downloads/troikano/plugin.video.vk/total.svg) 
+![GitHub release](https://img.shields.io/github/release/troikano/plugin.video.vk2.svg) 
+![GitHub license](https://img.shields.io/github/license/troikano/plugin.video.vk2.svg) 
+![GitHub downloads](https://img.shields.io/github/downloads/troikano/plugin.video.vk2/total.svg) 
 
 - [Requirements](#requirements)
 - [Installation](#installation)
@@ -23,7 +23,7 @@
 ## Installation
 
 1. Download the add-on zip file:<br>
-    [Latest release](https://github.com/Troikano/plugin.video.vk/releases/latest)
+    [Latest release](https://github.com/Troikano/plugin.video.vk2/releases/latest)
     
 2. Install in Kodi:<br>
     `Kodi → Settings → Add-ons → Install from zip file...`<br>
