@@ -1,6 +1,10 @@
 # CHANGELOG
 
 
+## plugin.video.vk2-2.0.1 (2021-11-19)
+
+Fixed new Login flow
+
 ## plugin.video.vk2-2.0.0 (2021-11-13)
 
 Added:

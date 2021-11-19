@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.vk2" name="VK" version="2.0.0" provider-name="Troikano">
+<addon id="plugin.video.vk2" name="VK" version="2.0.1" provider-name="Troikano">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.requests" version="2.8.1"/>
@@ -29,14 +29,7 @@
             <screenshot>resources/media/screenshot03.jpg</screenshot>
         </assets>
         <news>
-Added:
-- Python 3 support (Kodi v19+)
-
-Fixed:
-- Login flow AuthSession
-- TranslatePath in buildfp(filename)
-- Regex in resolvedpath to find the correct link hls
-- Encode problems
+Fixed new login flow
         </news>
     </extension>
 </addon>
