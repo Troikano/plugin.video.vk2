@@ -29,6 +29,8 @@
     `Kodi → Settings → Add-ons → Install from zip file...`<br>
     [How to install add-ons from zip files](https://kodi.wiki/view/HOW-TO:Install_add-ons_from_zip_files)
 
+Note: You can also install this add-on from [repository.troikano](https://troikano.github.io/repository.troikano/). 
+With this method, the add-on will auto-update when there is a new version available.
 
 ## Features
 
