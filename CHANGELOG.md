@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## plugin.video.vk2-2.0.1 (2021-12-17)
+
+Fixed video resolver
 
 ## plugin.video.vk2-2.0.1 (2021-11-19)
 
