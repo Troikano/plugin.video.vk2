@@ -10,6 +10,7 @@ import pickle
 import re
 import sys
 import urllib.parse as urlparse
+import requests
 
 import xbmc
 import xbmcvfs
@@ -1102,11 +1103,11 @@ def playvideo(ownerid, videoid):  # type: (int, int) -> None
     videoid = int(videoid)
     oidid = str('{}_{}'.format(ownerid, videoid))
     # resolve playable streams + find best quality
-    vkr = initvkresolver()
+    #vkr = initvkresolver()
     headers={
         'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0'
     }
-    r = vkr.get('https://vk.com/al_video.php?act=show_inline&al=1&video={}'.format(oidid), headers=headers)
+    r = requests.request('GET','https://vk.com/al_video.php?act=show_inline&al=1&video={}'.format(oidid), headers=headers)
     cnt = r.text.replace('\\', '')
     resolvedpath = None
     if ADDON.getSetting('preferhls') == 'true':
